@@ -2,10 +2,8 @@ FROM docker.io/golang:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-VOLUME [ "/go/src/" ]
-
 RUN apt-get update && \
-    apt-get install -y libblkid-dev util-linux dosfstools e2fsprogs btrfs-progs xfsprogs gdisk coreutils mdadm vim && \
+    apt-get install -y libblkid-dev util-linux dosfstools e2fsprogs btrfs-progs xfsprogs gdisk coreutils mdadm vim systemctl && \
     apt-get clean
 
 RUN go install golang.org/x/tools/gopls@latest
@@ -26,4 +24,3 @@ RUN mv /tmp/dlv /go/bin/dlv-dap
 WORKDIR /go/src
 
 ENV PATH="/opt/gtk/bin:${PATH}"
-
